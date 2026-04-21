@@ -1,0 +1,43 @@
+/**
+ * Problem 3 - Fibonacci Sequence
+ */
+
+// 1. This function finds ONE Fibonacci number
+function findFib(n) {
+    // If n is 0 or 1, just return the same number
+    if (n <= 1) {
+        return n;
+    }
+    // Formula: Current = (Previous 1) + (Previous 2)
+    // The function calls itself here (Recursion)
+    return findFib(n - 1) + findFib(n - 2);
+}
+
+// 2. This function builds the whole list (the sequence)
+function generateFibList(howMany) {
+    let resultList = [];
+    
+    // Loop from 0 up to the number the user wants
+    for (let i = 0; i < howMany; i++) {
+        // Get the Fibonacci number for this position and add to list
+        resultList.push(findFib(i));
+    }
+    
+    return resultList;
+}
+
+// --- RUN THE CODE ---
+let count = 10; // User specifies 10 elements
+let mySequence = generateFibList(count);
+
+console.log("Fibonacci Sequence:");
+console.log(mySequence.join(', '));
+
+
+// --- EASY TEST ---
+console.log("\nChecking if it works...");
+if (mySequence[0] === 0 && mySequence[4] === 3) {
+    console.log("Result: PASS");
+} else {
+    console.log("Result: FAIL");
+}

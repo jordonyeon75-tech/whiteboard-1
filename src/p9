@@ -1,0 +1,54 @@
+// Problem 9 - Node Path Existence (Shortest Path BFS)
+
+const graph = {
+    'A': ['B'],
+    'B': ['A', 'D', 'E', 'C'],
+    'C': ['F'],
+    'D': ['E', 'G'],
+    'E': ['F'],
+    'F': ['B', 'G'],
+    'G': [],
+    'H': []
+};
+
+function findShortestPath(start, end) {
+    // Queue for BFS: stores paths instead of just nodes
+    let queue = [[start]];
+    let visited = new Set();
+    visited.add(start);
+
+    while (queue.length > 0) {
+        let path = queue.shift(); // Get the first path in queue
+        let node = path[path.length - 1]; // Get the last node in that path
+
+        // If we reached the destination
+        if (node === end) {
+            return { exists: true, path: path.join(' --> ') };
+        }
+
+        // Look at neighbors
+        let neighbors = graph[node] || [];
+        for (let neighbor of neighbors) {
+            if (!visited.has(neighbor)) {
+                visited.add(neighbor);
+                // Create a new path including this neighbor and add to queue
+                queue.push([...path, neighbor]);
+            }
+        }
+    }
+
+    return { exists: false, path: null };
+}
+
+// --- TESTING THE EXAMPLES ---
+const testCases = [
+    { s: 'D', e: 'B' }, // False
+    { s: 'F', e: 'A' }, // True (F -> B -> A)
+    { s: 'G', e: 'C' }, // False
+    { s: 'E', e: 'D' }  // True (E -> F -> B -> D)
+];
+
+testCases.forEach(t => {
+    const result = findShortestPath(t.s, t.e);
+    console.log(`Start: ${t.s}, End: ${t.e} => Exists: ${result.exists}${result.path ? " (" + result.path + ")" : ""}`);
+});

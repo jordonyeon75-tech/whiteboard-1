@@ -1,0 +1,15 @@
+// Problem 4 - Find List Intersection
+let list1 = [4, 5, 2, 3, 1, 6];
+let list2 = [8, 7, 6, 9, 4, 5];
+let result = [];
+
+// Compare every number in list1 with every number in list2
+for (let i = 0; i < list1.length; i++) {
+    for (let j = 0; j < list2.length; j++) {
+        if (list1[i] == list2[j]) {
+            result.push(list1[i]); // If they match, add to result
+        }
+    }
+}
+
+console.log("Intersection: " + result.join(', '));

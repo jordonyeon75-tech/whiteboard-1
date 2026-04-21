@@ -1,0 +1,30 @@
+// Problem 5 - Symmetric Difference
+let list1 = [4, 5, 2, 3, 1, 6];
+let list2 = [8, 7, 6, 9, 4, 5];
+let result = [];
+
+// 1. Find items in List 1 that are NOT in List 2
+for (let i = 0; i < list1.length; i++) {
+    let found = false;
+    for (let j = 0; j < list2.length; j++) {
+        if (list1[i] == list2[j]) {
+            found = true;
+            break;
+        }
+    }
+    if (!found) result.push(list1[i]);
+}
+
+// 2. Find items in List 2 that are NOT in List 1
+for (let i = 0; i < list2.length; i++) {
+    let found = false;
+    for (let j = 0; j < list1.length; j++) {
+        if (list2[i] == list1[j]) {
+            found = true;
+            break;
+        }
+    }
+    if (!found) result.push(list2[i]);
+}
+
+console.log("Symmetric Difference: " + result.join(', '));
